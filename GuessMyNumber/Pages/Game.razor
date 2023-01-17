@@ -20,4 +20,24 @@
     public bool keepGoing;
     public string resultMessage;
     public string guessInput;
+
+    private void CheckGuess()
+    {
+
+        // TryParse den försöker göra om en string till en int
+        //Om den lyckas så sparar int:en i våran out variablen => "guessNum"
+        if (!int.TryParse(guessInput, out guessNum))
+        {
+            resultMessage = $"Hmmm, that doesn't look like a number. Try again.";
+            return;
+        }
+
+
+
+        if (guessNum == -1)
+        {
+            resultMessage = $"Hmm, Oh well. I was thinking of {theNumber} better luck next time!";
+
+        }
+    }
 }
