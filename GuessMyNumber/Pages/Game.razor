@@ -1,0 +1,23 @@
+﻿
+@page "/guessMyNumber"
+
+<h3>Let's play 'Guess my number'!</h3>
+<p>I'm thinking of a number between 0 and 20.</p>
+<p>Enter your guess, or -1 to give up.</p>
+
+<input type="number" @bind="guessInput" placeholder="Enter your guess here" />
+
+<button class="btn btn-primary" @onclick="CheckGuess">Guess</button>
+
+    <p>@resultMessage</p>
+
+
+@code
+{
+    public int theNumber;
+    public int guessNum;
+    public int guessCount;
+    public bool keepGoing;
+    public string resultMessage;
+    public string guessInput;
+}
