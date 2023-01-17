@@ -1,12 +1,22 @@
 ﻿
 
 
- *{
+* {
     font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    justify-content:center;
+   
 }
 
 body {
     background-color: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+main {
+    text-align: center;
+    margin-top: 150px;
 }
 
 .red {
@@ -15,4 +25,17 @@ body {
 
 .green{
     color:green;
+}
+.right {
+    /*    width: 52rem;
+    font-size: 2rem;*/
+    text-align: center;
+    margin-top:50px;
+}
+
+div{
+    
+    font-size :20px;
+    text-align: center;
+    margin-top: 60px;
 }
