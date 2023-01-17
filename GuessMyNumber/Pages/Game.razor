@@ -1,5 +1,4 @@
-﻿
-@page "/guessMyNumber"
+﻿@page "/guessMyNumber"
 
 <h3>Let's play 'Guess my number'!</h3>
 <p>I'm thinking of a number between 0 and 20.</p>
@@ -9,7 +8,7 @@
 
 <button class="btn btn-primary" @onclick="CheckGuess">Guess</button>
 
-    <p>@resultMessage</p>
+<p>@resultMessage</p>
 
 
 @code
@@ -20,6 +19,13 @@
     public bool keepGoing;
     public string resultMessage;
     public string guessInput;
+
+
+
+    protected override void OnInitialized()
+    {
+        theNumber = new Random().Next(20);
+    }
 
     private void CheckGuess()
     {
@@ -39,22 +45,22 @@
             resultMessage = $"Hmm, Oh well. I was thinking of {theNumber} better luck next time!";
 
         }
-    
 
-    {
-        guessCount++;
-
-        if (guessNum == theNumber)
-        {
-            resultMessage = $"You got it in {guessCount} guesses!! Great job!";
-
-        }
         else
         {
-            resultMessage = $"Nope, {(guessNum < theNumber ? "higher" : "lower")} than that.";
+            guessCount++;
+
+            if (guessNum == theNumber)
+            {
+                resultMessage = $"You got it in {guessCount} guesses!! Great job!";
+
+            }
+            else
+            {
+                resultMessage = $"Nope, {(guessNum < theNumber ? "higher" : "lower")} than that.";
 
 
+            }
         }
     }
-}
 }
