@@ -1,0 +1,18 @@
+﻿
+
+
+ *{
+    font-family: 'Press Start 2P', cursive;
+}
+
+body {
+    background-color: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
+.red {
+    color: red;
+}
+
+.green{
+    color:green;
+}
