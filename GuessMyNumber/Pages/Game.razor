@@ -21,6 +21,13 @@
     public string resultMessage;
     public string guessInput;
 
+
+
+    protected override void OnInitialized()
+    {
+        theNumber = new Random().Next(20);
+    }
+
     private void CheckGuess()
     {
 
@@ -40,7 +47,7 @@
 
         }
     
-
+    else
     {
         guessCount++;
 
