@@ -1,8 +1,8 @@
 # c-sharp-examination
 
-Highscore
-Tester TDD
-Kunna skriva alla bokstäver
+Highscore/n
+Tester TDD/n
+Kunna skriva alla bokstävern/
 Man ska kunna se att texten uppdateras
 Timer?
 Styling
