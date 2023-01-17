@@ -39,5 +39,22 @@
             resultMessage = $"Hmm, Oh well. I was thinking of {theNumber} better luck next time!";
 
         }
+    
+
+    {
+        guessCount++;
+
+        if (guessNum == theNumber)
+        {
+            resultMessage = $"You got it in {guessCount} guesses!! Great job!";
+
+        }
+        else
+        {
+            resultMessage = $"Nope, {(guessNum < theNumber ? "higher" : "lower")} than that.";
+
+
+        }
     }
+}
 }
