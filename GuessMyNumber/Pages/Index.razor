@@ -1,5 +1,5 @@
 ﻿@page "/"
-<main>
+<main class="">
 <h3>Let's play 'Guess my number'!</h3>
 <p>I'm thinking of a number between 0 and 20.</p>
 <p>Enter your guess, or -1 to give up.</p>
@@ -8,10 +8,14 @@
 
 
        
+            <div class="gameSpider">
+    <span class="ec ec-space-invader boxShadow" ></span>
+        
+    </div>
         
         <section class="right">
             <p class="message">Start guessing...</p>
-    <p class="label-score">💯 Score: <span class="score"></span>@guessCount</p>
+    <p class="label-score">💯 Your Guesses: <span class="score"></span>@guessCount</p>
             <p class="label-highscore">
                 🥇 Highscore: <span class="highscore">0</span>
             </p>
@@ -22,7 +26,8 @@
 <form class="right" @onsubmit="CheckGuess" @onsubmit:preventDefault>
 
     <input type="number" @bind="guessInput" placeholder="Enter your guess here" />
-    <button class="btn btn-primary">Guess</button>
+    <button class="btn btn-light  buttonColor">Guess</button>
+    <button type="button" class="btn btn-secondary" @onclick="Restart">Play Again!</button>
 </form>
 
 <div class="resultMsg">
@@ -36,10 +41,21 @@
     public int theNumber;
     public int guessNum;
     public int guessCount;
-  
+
     public string resultMessage;
     public string guessInput;
 
+    void Restart()
+    {
+        theNumber = new Random().Next(20);
+        guessCount = 0;
+        guessInput = "";
+        resultMessage = "";
+
+    }
+   
+  
+    
     void ColorMessage(string className, int colorTime = 500)
     {
         Task.Run(async () =>
@@ -51,6 +67,7 @@
             InvokeAsync(StateHasChanged);
         });
     }
+   
 
     protected override void OnInitialized()
     {
@@ -59,6 +76,7 @@
 
     private void CheckGuess()
     {
+
 
         // TryParse den försöker göra om en string till en int
         //Om den lyckas så sparar int:en i våran out variablen => "guessNum"

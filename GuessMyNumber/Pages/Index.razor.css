@@ -11,13 +11,21 @@
 }
 
 body {
-    background-color: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+      background-color: linear-gradient(120deg, #f6d365 0%, #fda085 100%);*/
+   
 }
 
 main {
     text-align: center;
-    margin-top: 150px;
+    margin-top: 100px;
+    color: indigo;
+    box-shadow:  blueviolet;
 }
+
+section {
+    color: indigo;
+}
+
 
 .red {
     color: red;
@@ -30,7 +38,7 @@ main {
     /*    width: 52rem;
     font-size: 2rem;*/
     text-align: center;
-    margin-top:50px;
+    margin-top:20px;
 }
 
 div{
@@ -38,4 +46,25 @@ div{
     font-size :20px;
     text-align: center;
     margin-top: 60px;
+}
+
+.gameSpider {
+    margin: 0;
+    width: 100%;
+    font-size: 100px;
+    text-align: center;
+    margin-bottom: 0;
+    
+
+
+    
+}
+.buttonColor {
+    color: white;
+    background-color: indigo;
+    border: 1px solid indigo;
+}
+.boxShadow {
+    box-shadow:  15px 20px 15px blueviolet;
+    border-radius: 30%;
 }
