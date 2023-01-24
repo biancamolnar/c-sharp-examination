@@ -9,6 +9,10 @@ html, body {
    
 }
 
+.purple {
+    color: purple;
+}
+
 h1:focus {
     outline: none;
 }
