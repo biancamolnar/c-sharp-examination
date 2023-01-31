@@ -1,4 +1,6 @@
 ﻿@page "/"
+
+
 <main class="">
     <h3>Let's play 'Guess my number'!</h3>
     <p>I'm thinking of a number between 0 and 20.</p>
@@ -33,9 +35,9 @@
 {
     string resultClass = "";
 
-    int theNumber;
-    int guessNum;
-    int guessCount;
+    public int theNumber;
+    public int guessNum;
+    public int guessCount;
     public int highScore = 1000;
     public string resultMessage;
     public string guessInput;
@@ -66,7 +68,7 @@
         theNumber = new Random().Next(20);
     }
 
-    private void CheckGuess()
+    public void CheckGuess()
     {
         // TryParse den försöker göra om en string till en int
         //Om den lyckas så sparar int:en i våran out variablen => "guessNum"
