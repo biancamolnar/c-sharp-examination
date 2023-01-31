@@ -1,6 +1,5 @@
 ﻿@page "/"
-
-
+<!--Instructions for the player-->
 <main class="">
     <h3>Let's play 'Guess my number'!</h3>
     <p>I'm thinking of a number between 0 and 20.</p>
@@ -15,18 +14,20 @@
 <section class="right">
     <p class="message">Start guessing...</p>
     <p class="label-score">💯 Your Guesses: <span class="score"></span>@guessCount</p>
+    <!--Display highscore-->
     <p class="label-highscore">
         🥇 Highscore: <span class="highscore">@highScore</span>
     </p>
 </section>
 
 <form class="right" @onsubmit="CheckGuess" @onsubmit:preventDefault>
-
+    <!--User input-->
     <input type="number" @bind="guessInput" placeholder="Enter your guess here" />
     <button class="btn btn-light  buttonColor">Guess</button>
     <button type="button" class="btn btn-secondary" @onclick="Restart">Play Again!</button>
 </form>
 
+<!--The result of the user input-->
 <div class="resultMsg">
     <p class=@resultClass>@resultMessage</p>
 </div>
@@ -38,10 +39,12 @@
     public int theNumber;
     public int guessNum;
     public int guessCount;
+    //the highscore starts with 1000 because it's the lowest, if highscore is 0 from start you could not score better than 0
     public int highScore = 1000;
     public string resultMessage;
     public string guessInput;
 
+    //restart is the button to play again, the guessCount always starts at 0
     void Restart()
     {
         theNumber = new Random().Next(20);
@@ -51,6 +54,8 @@
 
     }
 
+    /*this is a function for the colour for each result message, if guess is wrong the colour will be red, 
+    if answer is correct the colour changes to green, and purple for regular message*/
     void ColorMessage(string className, int colorTime = 500)
     {
         Task.Run(async () =>
@@ -62,7 +67,8 @@
             InvokeAsync(StateHasChanged);
         });
     }
-
+     /*function to generate a random number between 0-20 that the player has to guess, the method OnInitialized() 
+     is executed when the component is initialized*/
     protected override void OnInitialized()
     {
         theNumber = new Random().Next(20);
@@ -70,14 +76,16 @@
 
     public void CheckGuess()
     {
-        // TryParse den försöker göra om en string till en int
-        //Om den lyckas så sparar int:en i våran out variablen => "guessNum"
+        /* TryParse converts from a string to an int.
+        If it succeeds the int is saved in our out variable => "guessNum".
+        Function for error message when the player's input is something else than a number*/
         if (!int.TryParse(guessInput, out guessNum))
         {
             resultMessage = $"Hmmm, that doesn't look like a number. Try again.";
             return;
         }
 
+        //function for if the player wants to end the game
         if (guessNum == -1)
         {
             resultMessage = $"Hmm, Oh well. I was thinking of {theNumber} better luck next time!";
@@ -85,6 +93,8 @@
             return;
         }
 
+        /*function for when the player that writes a number that is lower than 0 or higher than 20,
+        the number 100000 stands for how long the message is displayed in purple*/
         if(guessNum < 0 || guessNum > 20)
         {
             resultMessage = "Please choose between 0 and 20. Try again!";
@@ -94,15 +104,18 @@
 
         guessCount++;
 
+        //if statement for if the user has the correct answer
         if (guessNum == theNumber)
         {
             resultMessage = $"You got it in {guessCount} guesses!! Great job!";
             ColorMessage("green", 100000);
+            //the player has guessed the right number, and now it is saved in the highscore how many guesses the player used
             if (guessCount < highScore)
             {
                 highScore = guessCount;
             }
         }
+        //if the user's guess is between 0-20 but wrong, the message will show if theNumber is lower or higher than input
         else
         {
             resultMessage = $"Nope, {(guessNum < theNumber ? "higher" : "lower")} than that.";
