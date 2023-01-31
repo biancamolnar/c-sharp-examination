@@ -58,10 +58,10 @@ namespace BlazorTestPro
         public void GameShouldAddHighscore()
         {
             var game = RenderComponent<Game>();
-            game.Instance.guessInput = "1";
-            game.Instance.theNumber = 1;
+            game.Instance.guessInput = "4";
+            game.Instance.theNumber = 4;
             game.Find("button").Click();
-            Assert.Equal("🥇 Highscore: 1", game.Instance.highScore);
+            Assert.Equal(1, game.Instance.highScore);
         }
     }
 }
