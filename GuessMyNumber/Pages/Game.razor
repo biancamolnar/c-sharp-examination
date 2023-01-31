@@ -1,36 +1,75 @@
-﻿
-@page "/guessMyNumber"
+﻿@page "/"
 
-<h3>Let's play 'Guess my number'!</h3>
-<p>I'm thinking of a number between 0 and 20.</p>
-<p>Enter your guess, or -1 to give up.</p>
 
-<input type="number" @bind="guessInput" placeholder="Enter your guess here" />
+<main class="">
+    <h3>Let's play 'Guess my number'!</h3>
+    <p>I'm thinking of a number between 0 and 20.</p>
+    <p>Enter your guess, or -1 to give up.</p>
+</main>
 
-<button class="btn btn-primary" @onclick="CheckGuess">Guess</button>
+<div class="gameSpider">
+    <span class="ec ec-space-invader boxShadow"></span>
 
-    <p>@resultMessage</p>
+</div>
 
+<section class="right">
+    <p class="message">Start guessing...</p>
+    <p class="label-score">💯 Your Guesses: <span class="score"></span>@guessCount</p>
+    <p class="label-highscore">
+        🥇 Highscore: <span class="highscore">@highScore</span>
+    </p>
+</section>
+
+<form class="right" @onsubmit="CheckGuess" @onsubmit:preventDefault>
+
+    <input type="number" @bind="guessInput" placeholder="Enter your guess here" />
+    <button class="btn btn-light  buttonColor">Guess</button>
+    <button type="button" class="btn btn-secondary" @onclick="Restart">Play Again!</button>
+</form>
+
+<div class="resultMsg">
+    <p class=@resultClass>@resultMessage</p>
+</div>
 
 @code
 {
+    string resultClass = "";
+
     public int theNumber;
     public int guessNum;
     public int guessCount;
-    public bool keepGoing;
+    public int highScore = 1000;
     public string resultMessage;
     public string guessInput;
 
+    void Restart()
+    {
+        theNumber = new Random().Next(20);
+        guessCount = 0;
+        guessInput = "";
+        resultMessage = "";
 
+    }
+
+    void ColorMessage(string className, int colorTime = 500)
+    {
+        Task.Run(async () =>
+        {
+            resultClass = className;
+            InvokeAsync(StateHasChanged);
+            await Task.Delay(colorTime);
+            resultClass = "";
+            InvokeAsync(StateHasChanged);
+        });
+    }
 
     protected override void OnInitialized()
     {
         theNumber = new Random().Next(20);
     }
 
-    private void CheckGuess()
+    public void CheckGuess()
     {
-
         // TryParse den försöker göra om en string till en int
         //Om den lyckas så sparar int:en i våran out variablen => "guessNum"
         if (!int.TryParse(guessInput, out guessNum))
@@ -39,29 +78,36 @@
             return;
         }
 
-
-
         if (guessNum == -1)
         {
             resultMessage = $"Hmm, Oh well. I was thinking of {theNumber} better luck next time!";
-
+            ColorMessage("purple", 100000);
+            return;
         }
-    
-    else
-    {
+
+        if(guessNum < 0 || guessNum > 20)
+        {
+            resultMessage = "Please choose between 0 and 20. Try again!";
+            ColorMessage("purple", 100000);
+            return;
+        }
+
         guessCount++;
 
         if (guessNum == theNumber)
         {
             resultMessage = $"You got it in {guessCount} guesses!! Great job!";
-
+            ColorMessage("green", 100000);
+            if (guessCount < highScore)
+            {
+                highScore = guessCount;
+            }
         }
         else
         {
             resultMessage = $"Nope, {(guessNum < theNumber ? "higher" : "lower")} than that.";
-
-
+            ColorMessage("red", 1000);
         }
+
     }
-}
 }
